@@ -10,11 +10,11 @@ using OpenQA.Selenium.Support.UI;
 namespace WebaddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTest
+    public class GroupCreationTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
-        private string baseURL ;
+        private string baseURL;
         private bool acceptNextAlert = true;
 
         [SetUp]
