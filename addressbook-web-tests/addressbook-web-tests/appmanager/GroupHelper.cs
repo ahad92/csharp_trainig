@@ -11,17 +11,19 @@ namespace WebaddressbookTests
         {
         }
 
-        public void ReturnToGroupsPage()
+        public GroupHelper ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
+            return this;
         }
 
-        public void SubmitGroupCreation()
+        public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
 
-        public void FillGroupForm(GroupData group)
+        public GroupHelper FillGroupForm(GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Clear();
             driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
@@ -29,24 +31,30 @@ namespace WebaddressbookTests
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
+            return this;
+
         }
 
-        public void InitGroupCreation()
+        public GroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
+            return this;
         }
 
-        public void SubmitContactCreation()
+        public GroupHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
+
         }
 
-        public void InitContactCreation()
+        public GroupHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public GroupHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
@@ -58,15 +66,18 @@ namespace WebaddressbookTests
             driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).SendKeys(contact.Email);
+            return this;
         }
-        public void SelectGroup(int index)
+        public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath($"//input[@name='selected[]']['{index}']")).Click();
+            return this;
         }
 
-        public void RemoveGroup()
+        public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            return this;
         }
     }
 }

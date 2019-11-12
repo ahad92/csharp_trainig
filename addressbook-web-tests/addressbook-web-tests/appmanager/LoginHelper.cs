@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium;
 
-
-
 namespace WebaddressbookTests
 {
     public class LoginHelper : HelperBase
