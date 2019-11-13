@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using System;
 
 namespace WebaddressbookTests
@@ -11,14 +12,24 @@ namespace WebaddressbookTests
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
         protected GroupHelper groupHelper;
-        private object verificationErrors;
+        protected ContactHelper contactHelper;
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver,baseURL);
-            groupHelper = new GroupHelper(driver);
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost";
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this,baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
+
+        public IWebDriver Driver 
+        { 
+            get => driver;
+
+        }
+
 
         public LoginHelper Auth
         {
@@ -30,10 +41,17 @@ namespace WebaddressbookTests
             get => navigator;
         }
 
-        public GroupHelper GroupHelper
+        public GroupHelper Groups
         {
             get => groupHelper;
         }
+
+        public ContactHelper ContactHelper
+        {
+            get => contactHelper;
+        }
+
+
 
         public void Stop()
 
@@ -46,7 +64,6 @@ namespace WebaddressbookTests
                 {
                     // Ignore errors if unable to close the browser
                 }
-                Assert.AreEqual("", verificationErrors.ToString());
          }
     }
 }

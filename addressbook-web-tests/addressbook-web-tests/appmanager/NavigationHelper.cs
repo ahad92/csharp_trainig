@@ -7,25 +7,34 @@ namespace WebaddressbookTests
     {
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
-            : base(driver)
+        public NavigationHelper(ApplicationManager manager, string baseURL)
+            : base(manager)
         {
             this.baseURL = baseURL;
         }
 
-        public void GoToHomePage()
+        public NavigationHelper GoToHomePage()
         {
             driver.Navigate().GoToUrl(baseURL + "/addressbook");
+            return this;
         }
 
-        public void GoToGroupsPage()
+        public NavigationHelper GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
 
-        public void Logout()
+        public NavigationHelper GoToAddContactsPage()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+
+        public NavigationHelper Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
         }
 
     }

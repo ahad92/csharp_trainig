@@ -9,18 +9,21 @@ namespace WebaddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GoToGroupsPage();
-            app.GroupHelper.InitGroupCreation();
+
             GroupData group = new GroupData("aaa");
             group.Header = "ddd";
             group.Footer = "fff";
-            app.GroupHelper.FillGroupForm(group);
-            app.GroupHelper.SubmitGroupCreation();
-            app.GroupHelper.ReturnToGroupsPage();
-            app.Navigator.Logout();
+
+            app.Groups.Create(group);
         }
+        public void EmptyGroupCreationTest()
+
+        {
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+            app.Groups.Create(group);
+         }
     }
 }
     
