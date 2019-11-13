@@ -12,7 +12,7 @@ namespace WebaddressbookTests
         {
         }
 
-        internal GroupHelper Remove(int groupNum)
+        public GroupHelper Remove(int groupNum)
         {
             manager.Navigator.GoToGroupsPage();
             SelectGroup(groupNum);

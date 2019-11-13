@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 
 namespace WebaddressbookTests
@@ -9,6 +10,29 @@ namespace WebaddressbookTests
         public ContactHelper(ApplicationManager manager)
                 : base(manager)
         {
+        }
+
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
+            return this;
+        }
+
+
+        internal ContactHelper Remove(int contactNum)
+        {
+            SelectContact(contactNum);
+            RemoveContact();
+            AcceptAlert();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath($"//input[@name='selected[]']['{index}']")).Click();
+            return this;
         }
 
         public ContactHelper Create(ContactData contact)
@@ -46,6 +70,12 @@ namespace WebaddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+
+        public ContactHelper AcceptAlert()
+        {
+            driver.SwitchTo().Alert().Accept();
             return this;
         }
 
