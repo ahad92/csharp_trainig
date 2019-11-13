@@ -27,7 +27,6 @@ namespace WebaddressbookTests
         public IWebDriver Driver 
         { 
             get => driver;
-
         }
 
 
@@ -46,7 +45,7 @@ namespace WebaddressbookTests
             get => groupHelper;
         }
 
-        public ContactHelper ContactHelper
+        public ContactHelper Contacts
         {
             get => contactHelper;
         }

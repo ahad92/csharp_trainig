@@ -42,6 +42,7 @@ namespace WebaddressbookTests
             return this;
         }
 
+
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();

@@ -12,10 +12,10 @@ namespace WebaddressbookTests
         {
         }
 
-        internal GroupHelper Remove(int p)
+        internal GroupHelper Remove(int groupNum)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(1);
+            SelectGroup(groupNum);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
@@ -24,6 +24,30 @@ namespace WebaddressbookTests
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            return this;
+        }
+
+        internal GroupHelper Modify(int groupNum, GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(groupNum);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+
+        }
+
+        private GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        private GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
 

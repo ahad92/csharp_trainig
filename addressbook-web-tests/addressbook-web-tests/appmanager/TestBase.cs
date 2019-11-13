@@ -19,7 +19,6 @@ namespace WebaddressbookTests
         [TearDown]
         public void TeardownTest()
         {
-            app.Navigator.Logout();
             app.Stop();
         }
      
