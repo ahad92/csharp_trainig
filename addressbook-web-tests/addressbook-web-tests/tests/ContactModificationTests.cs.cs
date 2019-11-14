@@ -9,12 +9,12 @@ namespace WebaddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newContactData = new ContactData("Myname", "MyMiddlename");
-            newContactData.LastName = "MyLastName";
-            newContactData.Nickname = "MyNickname";
-            newContactData.Email = "testemail@mailbox213.com";
+            ContactData newContactData = new ContactData("Edited_Name", " Edited_MyMiddlename");
+            newContactData.LastName = "Edited_LastName";
+            newContactData.Nickname = "Edited_MyNickname";
+            newContactData.Email = "Edited_testemail@mailbox213.com";
 
-            app.Contacts.Modify(1, newContactData);
+            app.Contacts.Modify(2,2,newContactData);
         }
     }
 }

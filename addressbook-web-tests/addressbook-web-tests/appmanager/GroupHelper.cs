@@ -84,6 +84,8 @@ namespace WebaddressbookTests
             return this;
         }
 
+
+
         public GroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -93,7 +95,8 @@ namespace WebaddressbookTests
  
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath($"//input[@name='selected[]']['{index}']")).Click();
+//            driver.FindElement(By.XPath($"//input[@name='selected[]']['{index}']")).Click();
+            driver.FindElement(By.XPath($"//div[@id='content']//span[{index}]//input[@name='selected[]']")).Click();
             return this;
         }
 

@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 
-
 namespace WebaddressbookTests
 {
     [TestFixture]
@@ -9,7 +8,7 @@ namespace WebaddressbookTests
         [Test]
         public void TheGroupRemoveTest()
         {
-            app.Groups.Remove(1);
+            app.Groups.Remove(2);
         }
     }
 }

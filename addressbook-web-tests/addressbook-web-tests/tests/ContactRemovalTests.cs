@@ -3,14 +3,12 @@
 namespace WebaddressbookTests.tests
 {
     [TestFixture]
-
-
     class ContactRemovalTests : TestBase
     {
         [Test]
         public void GroupModificationTest()
         {
-            app.Contacts.Remove(1);
+            app.Contacts.Remove(2);
         }
     }
 }
