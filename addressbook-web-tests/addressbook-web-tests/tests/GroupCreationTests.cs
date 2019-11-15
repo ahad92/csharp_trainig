@@ -9,11 +9,9 @@ namespace WebaddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-
             GroupData group = new GroupData("aaa");
             group.Header = "ddd";
             group.Footer = "fff";
-
             app.Groups.Create(group);
         }
         public void EmptyGroupCreationTest()

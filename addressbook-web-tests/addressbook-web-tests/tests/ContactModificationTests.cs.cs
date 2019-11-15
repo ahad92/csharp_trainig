@@ -10,8 +10,8 @@ namespace WebaddressbookTests
         public void ContactModificationTest()
         {
             ContactData newContactData = new ContactData("Edited_Name", " Edited_MyMiddlename");
-            newContactData.LastName = "Edited_LastName";
-            newContactData.Nickname = "Edited_MyNickname";
+            newContactData.LastName = null;
+            newContactData.Nickname = null ;
             newContactData.Email = "Edited_testemail@mailbox213.com";
 
             app.Contacts.Modify(2,2,newContactData);

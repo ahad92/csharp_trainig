@@ -6,7 +6,7 @@ namespace WebaddressbookTests.tests
     class ContactRemovalTests : TestBase
     {
         [Test]
-        public void GroupModificationTest()
+        public void ContactRemovalTest()
         {
             app.Contacts.Remove(2);
         }
