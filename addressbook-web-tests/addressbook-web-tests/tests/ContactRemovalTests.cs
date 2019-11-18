@@ -8,7 +8,8 @@ namespace WebaddressbookTests.tests
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.Remove(2);
+            ContactData contact = new ContactData("MynameBeforeDeleting", "MyMiddlenameBeforeDeleting");
+            app.Contacts.Remove(1, contact);
         }
     }
 }

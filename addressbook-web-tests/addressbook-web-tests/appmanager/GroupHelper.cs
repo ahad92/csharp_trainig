@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 
 namespace WebaddressbookTests
@@ -10,30 +11,52 @@ namespace WebaddressbookTests
             : base(manager)
         {
         }
-
-        public GroupHelper Remove(int groupNum)
+        public GroupHelper Create(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
+            InitGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+            return this;
+        }
+
+        public GroupHelper Remove(int groupNum, GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!IsGroupExist())
+            {
+                Create(group);
+            }
             SelectGroup(groupNum);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
 
-        public GroupHelper RemoveGroup()
-        {
-            driver.FindElement(By.Name("delete")).Click();
-            return this;
-        }
-
-        internal GroupHelper Modify(int groupNum, GroupData newData)
+        public GroupHelper Modify(int groupNum, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
+            if (!IsGroupExist())
+            {
+                Create(newData);
+            }
             SelectGroup(groupNum);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
             ReturnToGroupsPage();
+            return this;
+        }
+
+        public bool IsGroupExist()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+
+        public GroupHelper RemoveGroup()
+        {
+            driver.FindElement(By.Name("delete")).Click();
             return this;
         }
 
@@ -48,17 +71,6 @@ namespace WebaddressbookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
-
-        public GroupHelper Create(GroupData group)
-        {
-            manager.Navigator.GoToGroupsPage();
-            InitGroupCreation();
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            return this;
-        }
-
         public GroupHelper ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();

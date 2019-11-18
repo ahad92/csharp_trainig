@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace WebaddressbookTests
 {
@@ -16,19 +17,42 @@ namespace WebaddressbookTests
             return this;
         }
 
-        public ContactHelper Remove(int contactNum)
+        public ContactHelper Create(ContactData contact)
         {
-            manager.Navigator.GoToHomePage();
+            manager.Navigator.GoToAddContactsPage();
+            InitContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToHomePage();
+            return this;
+        }
+
+
+        public void Remove(int contactNum, ContactData contact)
+        {
+           manager.Navigator.GoToHomePage();
+           if (!IsContactExist())
+            {
+                Create(contact);
+            }
             SelectContact(contactNum);
             RemoveContact();
             AcceptAlert();
             manager.Navigator.GoToHomePage();
-            return this;
+        }
+
+        private bool IsContactExist()
+        {
+            return IsElementPresent(By.Name("selected[]"));
         }
 
         public ContactHelper Modify(int contactNum,int rowNumber,ContactData newData)
         {
             manager.Navigator.GoToHomePage();
+            if (!IsContactExist())
+            {
+                Create(newData);
+            }
             SelectContact(contactNum);
             InitContactModification(rowNumber);
             FillContactForm(newData);
@@ -53,16 +77,6 @@ namespace WebaddressbookTests
         {
            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']")).Click();
            return this;
-        }
-
-        public ContactHelper Create(ContactData contact)
-        {
-            manager.Navigator.GoToAddContactsPage();
-            InitContactCreation();
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            return this;
         }
 
         public ContactHelper InitContactCreation()
