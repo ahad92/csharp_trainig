@@ -1,9 +1,10 @@
 ﻿using NUnit.Framework;
 
 namespace WebaddressbookTests
+
 {
     [TestFixture]
-    public class GroupRemovalTests : TestBase
+    public class GroupRemovalTests : AuthTestBase
     {
         [Test]
         public void TheGroupRemoveTest()

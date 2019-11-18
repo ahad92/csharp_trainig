@@ -3,7 +3,7 @@
 namespace WebaddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTest : TestBase
+    public class ContactCreationTest : AuthTestBase
     {
         [Test]
         public void ContactCreationTests()
@@ -12,9 +12,7 @@ namespace WebaddressbookTests
             contact.LastName = "MyLastName";
             contact.Nickname = "MyNickname";
             contact.Email = "testemail@mailbox213.com";
-
             app.Contacts.Create(contact);
-
         }
     }
 }

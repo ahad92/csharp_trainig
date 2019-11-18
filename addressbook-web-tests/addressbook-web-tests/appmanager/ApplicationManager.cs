@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
 using System.Threading;
@@ -12,7 +11,7 @@ namespace WebaddressbookTests
         protected string baseURL;
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
-        protected GroupHelper groupHelper;
+        protected GroupHelper groupHelper; 
         protected ContactHelper contactHelper;
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
@@ -21,7 +20,6 @@ namespace WebaddressbookTests
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost";
-
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this,baseURL);
             groupHelper = new GroupHelper(this);
@@ -32,7 +30,9 @@ namespace WebaddressbookTests
         {
             if (! app.IsValueCreated )
             {
-                app.Value = new ApplicationManager();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.GoToHomePage();
+                app.Value = newInstance;
             }
             return app.Value;
         }
