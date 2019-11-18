@@ -18,7 +18,6 @@ namespace WebaddressbookTests
           
             //verification
             Assert.IsTrue(app.Auth.IsLoggedIn(account));
-
         }
 
         [Test]
@@ -35,6 +34,5 @@ namespace WebaddressbookTests
             //verification
             Assert.IsTrue(app.Auth.IsLoggedIn(account));
         }
-
     }
 }

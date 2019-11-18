@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace WebaddressbookTests
@@ -11,7 +13,7 @@ namespace WebaddressbookTests
         protected string baseURL;
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
-        protected GroupHelper groupHelper; 
+        protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
@@ -21,14 +23,14 @@ namespace WebaddressbookTests
             driver = new FirefoxDriver();
             baseURL = "http://localhost";
             loginHelper = new LoginHelper(this);
-            navigator = new NavigationHelper(this,baseURL);
+            navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
 
         public static ApplicationManager GetInstance()
         {
-            if (! app.IsValueCreated )
+            if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
                 newInstance.Navigator.GoToHomePage();
@@ -37,20 +39,20 @@ namespace WebaddressbookTests
             return app.Value;
         }
 
-         ~ApplicationManager()
+        ~ApplicationManager()
         {
-          try
-              {
-                    driver.Quit();
-              }
-          catch (Exception)
-               {
-                    // Ignore errors if unable to close the browser
-               }
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
         }
 
-        public IWebDriver Driver 
-        { 
+        public IWebDriver Driver
+        {
             get => driver;
         }
 
@@ -74,6 +76,5 @@ namespace WebaddressbookTests
         {
             get => contactHelper;
         }
- 
     }
 }

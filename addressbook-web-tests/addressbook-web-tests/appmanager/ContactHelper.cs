@@ -16,9 +16,9 @@ namespace WebaddressbookTests
             return this;
         }
 
-
-        internal ContactHelper Remove(int contactNum)
+        public ContactHelper Remove(int contactNum)
         {
+            manager.Navigator.GoToHomePage();
             SelectContact(contactNum);
             RemoveContact();
             AcceptAlert();
@@ -44,7 +44,7 @@ namespace WebaddressbookTests
         }
 
         private ContactHelper InitContactModification(int index)
-        {
+        {   
             driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']/../..//img[@alt='Edit']")).Click();
             return this;
         }
