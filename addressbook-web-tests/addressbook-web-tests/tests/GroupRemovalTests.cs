@@ -10,7 +10,13 @@ namespace WebaddressbookTests
         public void TheGroupRemoveTest()
         {
             GroupData newData = new GroupData("editedName");
-            app.Groups.Remove(1, newData);
+
+            app.Navigator.GoToGroupsPage();
+            if (!app.Groups.IsGroupExist())
+            {
+                app.Groups.Create(newData);
+            }
+            app.Groups.Remove(1);
         }
     }
 }

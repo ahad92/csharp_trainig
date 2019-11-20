@@ -13,6 +13,11 @@ namespace WebaddressbookTests
             newContactData.Nickname = null ;
             newContactData.Email = "Edited_testemail@mailbox213.com";
 
+            if (!app.Contacts.IsContactExist())
+            {
+                app.Contacts.Create(newContactData);
+            }
+
             app.Contacts.Modify(1,1,newContactData);
         }
     }

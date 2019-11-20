@@ -28,20 +28,16 @@ namespace WebaddressbookTests
         }
 
 
-        public void Remove(int contactNum, ContactData contact)
+        public void Remove(int contactNum)
         {
-           manager.Navigator.GoToHomePage();
-           if (!IsContactExist())
-            {
-                Create(contact);
-            }
+           manager.Navigator.GoToHomePage();      
             SelectContact(contactNum);
             RemoveContact();
             AcceptAlert();
             manager.Navigator.GoToHomePage();
         }
 
-        private bool IsContactExist()
+        public bool IsContactExist()
         {
             return IsElementPresent(By.Name("selected[]"));
         }
@@ -77,6 +73,13 @@ namespace WebaddressbookTests
         {
            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']")).Click();
            return this;
+        }
+
+
+        public ContactHelper SelectContact1(int index)
+        {
+            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']")).Click();
+            return this;
         }
 
         public ContactHelper InitContactCreation()

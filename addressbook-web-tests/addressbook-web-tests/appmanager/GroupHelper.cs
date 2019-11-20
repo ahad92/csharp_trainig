@@ -21,13 +21,9 @@ namespace WebaddressbookTests
             return this;
         }
 
-        public GroupHelper Remove(int groupNum, GroupData group)
+        public GroupHelper Remove(int groupNum)
         {
             manager.Navigator.GoToGroupsPage();
-            if (!IsGroupExist())
-            {
-                Create(group);
-            }
             SelectGroup(groupNum);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -37,10 +33,6 @@ namespace WebaddressbookTests
         public GroupHelper Modify(int groupNum, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            if (!IsGroupExist())
-            {
-                Create(newData);
-            }
             SelectGroup(groupNum);
             InitGroupModification();
             FillGroupForm(newData);
@@ -51,6 +43,7 @@ namespace WebaddressbookTests
 
         public bool IsGroupExist()
         {
+
             return IsElementPresent(By.Name("selected[]"));
         }
 
