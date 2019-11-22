@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 
 
@@ -19,6 +20,18 @@ namespace WebaddressbookTests
             SubmitGroupCreation();
             ReturnToGroupsPage();
             return this;
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
         }
 
         public GroupHelper Remove(int groupNum)
@@ -43,7 +56,6 @@ namespace WebaddressbookTests
 
         public bool IsGroupExist()
         {
-
             return IsElementPresent(By.Name("selected[]"));
         }
 
@@ -78,7 +90,6 @@ namespace WebaddressbookTests
 
         public GroupHelper FillGroupForm(GroupData group)
         {
- 
             Type(By.Name("group_name"), group.Name);
             Type(By.Name("group_header"), group.Header);
             Type(By.Name("group_footer"), group.Footer);
@@ -90,7 +101,6 @@ namespace WebaddressbookTests
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
- 
         public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath($"//div[@id='content']//span[{index}]//input[@name='selected[]']")).Click();
