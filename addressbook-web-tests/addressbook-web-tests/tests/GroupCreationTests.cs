@@ -36,7 +36,7 @@ namespace WebaddressbookTests
         [Test]
         public void BadNameGroupCreationTest()
         {
-            GroupData group = new GroupData("a'a");
+            GroupData group = new GroupData("bad_name");
             group.Header = "";
             group.Footer = "";
 

@@ -1,7 +1,7 @@
-﻿namespace WebaddressbookTests
+﻿using System;
+namespace WebaddressbookTests
 {
-    public class GroupData
-
+    public class GroupData : IEquatable<GroupData>
     {
         private string name;
         private string header = "";
@@ -10,6 +10,24 @@
         public GroupData(string name)
         {
             this.name = name;
+        }
+
+        public bool Equals(GroupData other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this,other))
+            {
+                return true;
+            }
+            return Name == other.Name;
+        }
+
+        public int GetHashCode()
+        {
+            return Name.GetHashCode();
         }
 
         public GroupData(string name,string header, string footer)
@@ -41,7 +59,6 @@
                 header = value;
             }
         }
-
         public string Footer
         {
             get
@@ -53,8 +70,5 @@
                 footer = value;
             }
         }
-
-
-
     }
 }
