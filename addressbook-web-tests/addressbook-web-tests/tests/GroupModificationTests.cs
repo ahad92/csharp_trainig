@@ -18,7 +18,7 @@ namespace WebaddressbookTests
             {
                 app.Groups.Create(newData);
             }
-            app.Groups.Modify(1, newData);
+            app.Groups.Modify(0, newData);
         }
     }
 }
