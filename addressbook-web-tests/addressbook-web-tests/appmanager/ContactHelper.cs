@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 
 namespace WebaddressbookTests
@@ -27,6 +28,19 @@ namespace WebaddressbookTests
             return this;
         }
 
+        public List<ContactData> GetContactList() 
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name ='entry']"));
+
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData(element.Text, element.Text));
+            }
+
+            return contacts;
+        }        
 
         public void Remove(int contactNum)
         {
@@ -65,13 +79,13 @@ namespace WebaddressbookTests
 
         private ContactHelper InitContactModification(int index)
         {   
-            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']/../..//img[@alt='Edit']")).Click();
+            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index+1}]//input[@type='checkbox']/../..//img[@alt='Edit']")).Click();
             return this;
         }
 
         public ContactHelper SelectContact(int index)
         {
-           driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']")).Click();
+           driver.FindElement(By.XPath($"//tr[@name ='entry'][{index+1}]//input[@type='checkbox']")).Click();
            return this;
         }
 
