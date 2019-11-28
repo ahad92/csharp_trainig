@@ -10,10 +10,10 @@ namespace WebaddressbookTests
         private string nickname;
         private string email;
 
-        public ContactData(string firstName, string middleName)
+        public ContactData(string firstName, string lastName)
         {
             this.firstName = firstName;
-            this.middleName = middleName;
+            this.lastName = lastName;
         }
 
         public bool Equals(ContactData other)
@@ -28,8 +28,7 @@ namespace WebaddressbookTests
             }
             return FirstName == other.FirstName;
         }
-
-        public ContactData(string firstName, string middleName,string lastName, string nickname, string email)
+        public ContactData(string firstName, string middleName, string lastName, string nickname, string email)
         {
             this.firstName = firstName;
             this.middleName = middleName;
@@ -75,7 +74,7 @@ namespace WebaddressbookTests
 
         public override string ToString()
         {
-            return "name = " + FirstName;
+            return "name = " + FirstName + LastName;
         }
 
         public int CompareTo(ContactData other)

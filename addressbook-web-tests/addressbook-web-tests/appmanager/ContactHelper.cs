@@ -31,7 +31,7 @@ namespace WebaddressbookTests
         public List<ContactData> GetContactList() 
         {
             List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToGroupsPage();
+            manager.Navigator.GoToHomePage();
             ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name ='entry']"));
 
             foreach (IWebElement element in elements)
@@ -82,26 +82,16 @@ namespace WebaddressbookTests
             driver.FindElement(By.XPath($"//tr[@name ='entry'][{index+1}]//input[@type='checkbox']/../..//img[@alt='Edit']")).Click();
             return this;
         }
-
         public ContactHelper SelectContact(int index)
         {
            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index+1}]//input[@type='checkbox']")).Click();
            return this;
         }
-
-
-        public ContactHelper SelectContact1(int index)
-        {
-            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index}]//input[@type='checkbox']")).Click();
-            return this;
-        }
-
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
-
         public ContactHelper FillContactForm(ContactData contact)
         {
             Type(By.Name("firstname"), contact.FirstName);

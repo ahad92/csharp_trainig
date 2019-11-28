@@ -20,7 +20,6 @@ namespace WebaddressbookTests
             {
                 app.Contacts.Create(newContactData);
             }
-
             app.Contacts.Modify(1, 1, newContactData);
 
             List<ContactData> newGroups = app.Contacts.GetContactList();
