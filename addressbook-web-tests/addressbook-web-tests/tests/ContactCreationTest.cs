@@ -14,7 +14,6 @@ namespace WebaddressbookTests
             contact.Nickname = "MyNickname";
             contact.Email = "testemail@mailbox213.com";
             List<ContactData> oldContact = app.Contacts.GetContactList();
-
             app.Contacts.Create(contact);
 
             List<ContactData> newGroups = app.Contacts.GetContactList();

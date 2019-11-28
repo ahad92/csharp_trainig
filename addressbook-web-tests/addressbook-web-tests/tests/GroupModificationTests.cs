@@ -26,7 +26,6 @@ namespace WebaddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-
         }
     }
 }

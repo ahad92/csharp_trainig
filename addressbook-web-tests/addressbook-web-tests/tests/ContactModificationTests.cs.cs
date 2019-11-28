@@ -28,8 +28,6 @@ namespace WebaddressbookTests
             oldContact.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldContact, newGroups);
-
-
         }
     }
 }

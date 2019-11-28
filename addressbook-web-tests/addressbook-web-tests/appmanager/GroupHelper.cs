@@ -105,8 +105,6 @@ namespace WebaddressbookTests
             driver.FindElement(By.XPath($"//div[@id='content']//span[{index+1}]//input[@name='selected[]']")).Click();
             return this;
         }
-
-
     }
 }
 
