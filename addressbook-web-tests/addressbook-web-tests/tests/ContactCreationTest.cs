@@ -9,8 +9,7 @@ namespace WebaddressbookTests
         [Test]
         public void ContactCreationTests()
         {
-            ContactData contact = new ContactData("Myname", "MyMiddlename");
-            contact.LastName = "MyLastName";
+            ContactData contact = new ContactData("Myname", "MyLastName");
             contact.Nickname = "MyNickname";
             contact.Email = "testemail@mailbox213.com";
             List<ContactData> oldContact = app.Contacts.GetContactList();

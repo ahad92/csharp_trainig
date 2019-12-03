@@ -32,15 +32,21 @@ namespace WebaddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name ='entry']"));
-
-            foreach (IWebElement element in elements)
+ //           ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name ='entry']"));
+            ICollection<IWebElement> FirstNames = driver.FindElements(By.XPath("//tr[@name ='entry'][1]//td[2]"));
+            ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry'][1]//td[3]"));
+            foreach (IWebElement element in FirstNames)
             {
                 contacts.Add(new ContactData(element.Text, element.Text));
             }
 
+            foreach (IWebElement element in Lastnames)
+            {
+                contacts.Add(new ContactData(element.Text, element.Text));
+            }
             return contacts;
-        }        
+        }
+
 
         public void Remove(int contactNum)
         {
