@@ -10,7 +10,7 @@ namespace WebaddressbookTests.tests
         public void ContactRemovalTest()
         {
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-            ContactData contact = new ContactData("MynameBeforeDeleting", "MyMiddlenameBeforeDeleting");
+            ContactData contact = new ContactData("MynameBeforeDeleting", "MyLastnameBeforeDeleting");
 
             if (!app.Contacts.IsContactExist())
             {
