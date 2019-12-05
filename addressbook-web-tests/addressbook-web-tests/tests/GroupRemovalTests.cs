@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 namespace WebaddressbookTests
-
 {
     [TestFixture]
     public class GroupRemovalTests : AuthTestBase
@@ -23,8 +22,14 @@ namespace WebaddressbookTests
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach(GroupData in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, oldGroups[0].Id);
+            }
         }
     }
 }
