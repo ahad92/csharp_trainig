@@ -33,8 +33,8 @@ namespace WebaddressbookTests
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToHomePage();
  //           ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name ='entry']"));
-            ICollection<IWebElement> FirstNames = driver.FindElements(By.XPath("//tr[@name ='entry'][1]//td[2]"));
-            ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry'][1]//td[3]"));
+            ICollection<IWebElement> FirstNames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[3]"));
+            ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[2]"));
             foreach (IWebElement element in FirstNames)
             {
                 contacts.Add(new ContactData(element.Text, element.Text));
