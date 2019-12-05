@@ -14,20 +14,22 @@ namespace WebaddressbookTests
             newContactData.Nickname = null ;
             newContactData.Email = "Edited_testemail@mailbox213.com";
 
-            List<ContactData> oldContact = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             if (!app.Contacts.IsContactExist())
             {
                 app.Contacts.Create(newContactData);
             }
             app.Contacts.Modify(1, 1, newContactData);
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newGroups = app.Contacts.GetContactList();
-            oldContact[0].FirstName = newContactData.FirstName;
-            oldContact[0].LastName = newContactData.LastName;
-            oldContact.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldContact, newGroups);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            newContacts[0].FirstName = newContactData.FirstName;
+            newContacts[0].LastName = newContactData.LastName;
+            newContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

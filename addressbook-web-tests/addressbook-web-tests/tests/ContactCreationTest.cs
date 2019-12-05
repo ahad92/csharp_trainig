@@ -12,14 +12,16 @@ namespace WebaddressbookTests
             ContactData contact = new ContactData("Myname", "MyLastName");
             contact.Nickname = "MyNickname";
             contact.Email = "testemail@mailbox213.com";
-            List<ContactData> oldContact = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
 
-            List<ContactData> newGroups = app.Contacts.GetContactList();
-            oldContact.Add(contact);
-            oldContact.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldContact, newGroups);
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

@@ -17,11 +17,11 @@ namespace WebaddressbookTests
 
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newContacts = app.Groups.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+            newContacts.Sort();
+            Assert.AreEqual(oldGroups, newContacts);
         }
 
         [Test]

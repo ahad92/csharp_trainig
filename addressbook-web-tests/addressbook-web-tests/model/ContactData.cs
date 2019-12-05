@@ -74,7 +74,7 @@ namespace WebaddressbookTests
 
         public override string ToString()
         {
-            return "name = " + LastName;
+            return "name = " + FirstName + LastName;
         }
 
         public int CompareTo(ContactData other)
@@ -88,7 +88,7 @@ namespace WebaddressbookTests
                     return 1;
              }
 
-          return (LastName).CompareTo(other.LastName);
+          return (FirstName + LastName).CompareTo(other.FirstName + other.LastName);
         }
 
         public override int GetHashCode()

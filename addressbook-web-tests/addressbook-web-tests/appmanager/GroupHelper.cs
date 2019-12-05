@@ -22,7 +22,7 @@ namespace WebaddressbookTests
             return this;
         }
 
-        private List<GroupData>  groupCache = null;
+        private List<GroupData> groupCache = null;
         public List<GroupData> GetGroupList()
         {
             if (groupCache == null)
