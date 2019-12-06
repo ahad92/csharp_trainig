@@ -42,10 +42,17 @@ namespace WebaddressbookTests
                 contactCache = new List<ContactData>();
                 manager.Navigator.GoToHomePage();
                 ICollection<IWebElement> FirstNames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[3]"));
-                ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[2]"));
+    
+  //              ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry']"));  //works for it
+                ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[2]")); //isn't work inside td[2] (Lastname) 
                 foreach (IWebElement element in Lastnames)
                 {
-                    contactCache.Add(new ContactData(element.Text, element.Text));
+                    contactCache.Add(new ContactData(element.Text, element.Text)
+                    {
+                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+
+                        //                  Id = element.FindElement(By.CssSelector("//..//input[@name='selected[]']")).GetAttribute("value")
+                    }); 
                 }
 
                 //foreach (IWebElement element in  FirstNames )

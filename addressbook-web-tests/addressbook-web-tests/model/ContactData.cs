@@ -30,47 +30,24 @@ namespace WebaddressbookTests
         }
         public ContactData(string firstName, string middleName, string lastName, string nickname, string email)
         {
-            this.firstName = firstName;
-            this.middleName = middleName;
-            this.lastName = lastName;
-            this.nickname = nickname;
-            this.email = email;
+            FirstName = firstName;
+            MiddleName = middleName;
+            LastName = lastName;
+            Nickname = nickname;
+            Email = email;
         }
 
-        public string FirstName
-        {
-            get => firstName;
+        public string FirstName { get; set; }
 
-            set => firstName = value;
-        }
+        public string MiddleName { get; set; }
 
-        public string MiddleName
-        {
-            get => middleName;
+        public string LastName { get; set; }
 
-            set => middleName = value;
-        }
+        public string Email { get; set; }
 
-        public string LastName
-        {
-            get => lastName;
+        public string Nickname { get; set; }
 
-            set => lastName = value;
-        }
-
-        public string Email
-        {
-            get => email;
-
-            set => email = value;
-        }
-
-        public string Nickname
-        {
-            get => nickname;
-
-            set => nickname = value;
-        }
+        public string Id { get; set; }
 
         public override string ToString()
         {
