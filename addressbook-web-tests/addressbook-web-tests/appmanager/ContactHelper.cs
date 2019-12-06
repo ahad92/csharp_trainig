@@ -49,16 +49,13 @@ namespace WebaddressbookTests
                 {
                     contactCache.Add(new ContactData(element.Text, element.Text)
                     {
-                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+                        Id = element.FindElement(By.XPath("//tr[@name ='entry']//td[2]//..//input[@name='selected[]']")).GetAttribute("value")
 
-                        //                  Id = element.FindElement(By.CssSelector("//..//input[@name='selected[]']")).GetAttribute("value")
-                    }); 
+                        //    Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+                        //                Id = element.FindElement(By.xpath("//..//input[@name='selected[]']")).GetAttribute("value")
+                    }) ; 
                 }
 
-                //foreach (IWebElement element in  FirstNames )
-                //{
-                //    contactCache.Add(new ContactData(element.Text, element.Text));
-                //}
             }
             return new List<ContactData>(contactCache);
         }
@@ -68,6 +65,7 @@ namespace WebaddressbookTests
             SelectContact(contactNum);
             RemoveContact();
             AcceptAlert();
+            manager.Navigator.GoToHomePage();
             manager.Navigator.GoToHomePage();
         }
 
