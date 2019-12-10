@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
 
 namespace WebaddressbookTests
@@ -30,35 +31,35 @@ namespace WebaddressbookTests
         }
         public int GetContactCount()
         {
-            return driver.FindElements(By.XPath("//tr[@name ='entry']//td[3]")).Count;
+            
+            return driver.FindElements(By.XPath("//tr[@name ='entry']")).Count;
+          //  return driver.FindElements(By.XPath("//tr[@name ='entry']//td[3]")).Count;
         }
 
         private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
             if (contactCache == null)
             {
-
                 contactCache = new List<ContactData>();
                 manager.Navigator.GoToHomePage();
-                ICollection<IWebElement> FirstNames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[3]"));
-    
-  //              ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry']"));  //works for it
-                ICollection<IWebElement> Lastnames = driver.FindElements(By.XPath("//tr[@name ='entry']//td[2]")); //isn't work inside td[2] (Lastname) 
-                foreach (IWebElement element in Lastnames)
+                ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in rows)
                 {
-                    contactCache.Add(new ContactData(element.Text, element.Text)
+                    ICollection<IWebElement> td = element.FindElements(By.TagName("td"));
+
+                    contactCache.Add(new ContactData(td.ElementAt(2).Text + " ", td.ElementAt(1).Text)
                     {
-                        Id = element.FindElement(By.XPath("//tr[@name ='entry']//td[2]//..//input[@name='selected[]']")).GetAttribute("value")
-
-                        //    Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
-                        //                Id = element.FindElement(By.xpath("//..//input[@name='selected[]']")).GetAttribute("value")
-                    }) ; 
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("id")
+                    });
                 }
-
             }
-            return new List<ContactData>(contactCache);
+            return contactCache;
         }
+
+
+
         public void Remove(int contactNum)
         {
            manager.Navigator.GoToHomePage();      

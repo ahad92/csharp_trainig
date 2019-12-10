@@ -23,7 +23,6 @@ namespace WebaddressbookTests
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             
-            
             GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
@@ -32,7 +31,6 @@ namespace WebaddressbookTests
             {
                 Assert.AreNotEqual(group.Id, toBeRemoved.Id);
             }
-
         }
     }
 }
