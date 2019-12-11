@@ -14,20 +14,19 @@ namespace WebaddressbookTests
             newData.Footer = null;
 
             app.Navigator.GoToGroupsPage();
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
             if (!app.Groups.IsGroupExist())
             {
                 app.Groups.Create(newData);
             }
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Modify(0, newData);
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
-
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0].Name= newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
- //           Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

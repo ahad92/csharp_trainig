@@ -9,27 +9,27 @@ namespace WebaddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newContactData = new ContactData("Edited_Name", "EditedLastName");
-            newContactData.MiddleName = "EditedMiddleName";
-            newContactData.Nickname = null ;
-            newContactData.Email = "Edited_testemail@mailbox213.com";
-
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData newContactData = new ContactData("Edited_Name", "EditedLastName")
+            {
+                MiddleName = "EditedMiddleName",
+                Nickname = null,
+                Email = "Edited_testemail@mailbox213.com"
+            };
 
             if (!app.Contacts.IsContactExist())
             {
                 app.Contacts.Create(newContactData);
             }
-            app.Contacts.Modify(1, 1, newContactData);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Modify(0, 0, newContactData);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            newContacts[0].FirstName = newContactData.FirstName;
-            newContacts[0].LastName = newContactData.LastName;
+            oldContacts[0].FirstName = newContactData.FirstName;
+            oldContacts[0].LastName = newContactData.LastName;
+            oldContacts.Sort();
             newContacts.Sort();
-            newContacts.Sort();
-            Assert.AreEqual(oldContacts, newContacts);
+            Assert.AreEqual(newContacts, oldContacts);
         }
     }
 }

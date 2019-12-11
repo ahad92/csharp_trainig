@@ -10,6 +10,7 @@ namespace WebaddressbookTests
         public void LoginWithValidCredentails()
         {
             //prepare
+            app.Navigator.GoToHomePage();
             app.Auth.Logout();
            
             //action

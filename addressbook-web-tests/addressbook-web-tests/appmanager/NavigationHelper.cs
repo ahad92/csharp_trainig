@@ -29,7 +29,6 @@ namespace WebaddressbookTests
             {
                 return;
             }
-
             driver.FindElement(By.LinkText("groups")).Click();
         }
 

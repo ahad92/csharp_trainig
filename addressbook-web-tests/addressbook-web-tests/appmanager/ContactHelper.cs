@@ -13,31 +13,22 @@ namespace WebaddressbookTests
         {
         }
 
-        public ContactHelper RemoveContact()
+        public ContactHelper Create(ContactData contact)
         {
-            driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
-            contactCache = null;
+                manager.Navigator.GoToAddContactsPage();
+                InitContactCreation();
+                FillContactForm(contact);
+                SubmitContactCreation();
+                ReturnToHomePage();
             return this;
         }
 
-        public ContactHelper Create(ContactData contact)
-        {
-            manager.Navigator.GoToAddContactsPage();
-            InitContactCreation();
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            return this;
-        }
         public int GetContactCount()
-        {
-            
+        {            
             return driver.FindElements(By.XPath("//tr[@name ='entry']")).Count;
-          //  return driver.FindElements(By.XPath("//tr[@name ='entry']//td[3]")).Count;
         }
 
         private List<ContactData> contactCache = null;
-
         public List<ContactData> GetContactList()
         {
             if (contactCache == null)
@@ -49,7 +40,7 @@ namespace WebaddressbookTests
                 {
                     ICollection<IWebElement> td = element.FindElements(By.TagName("td"));
 
-                    contactCache.Add(new ContactData(td.ElementAt(2).Text + " ", td.ElementAt(1).Text)
+                    contactCache.Add(new ContactData(td.ElementAt(2).Text , td.ElementAt(1).Text)
                     {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("id")
                     });
@@ -58,16 +49,21 @@ namespace WebaddressbookTests
             return contactCache;
         }
 
-
-
         public void Remove(int contactNum)
         {
-           manager.Navigator.GoToHomePage();      
+           manager.Navigator.GoToHomePage();
             SelectContact(contactNum);
             RemoveContact();
             AcceptAlert();
+            AssertThatContactDeleted();
+ //           manager.Navigator.GoToGroupsPage();
             manager.Navigator.GoToHomePage();
-            manager.Navigator.GoToHomePage();
+        }
+
+        private bool AssertThatContactDeleted()
+        {
+  //         return IsElementPresent(By.CssSelector("div.msgbox"));
+           return IsElementPresent(By.LinkText("Record successful deleted"));
         }
 
         public bool IsContactExist()
@@ -95,6 +91,12 @@ namespace WebaddressbookTests
             driver.FindElement(By.Name("update")).Click();
             contactCache = null;
             return this;        
+        }
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
+            contactCache = null;
+            return this;
         }
 
         private ContactHelper InitContactModification(int index)

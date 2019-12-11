@@ -26,7 +26,9 @@ namespace WebaddressbookTests
             {
                 return true;
             }
-            return LastName == other.LastName;
+            return FirstName == other.FirstName && LastName == other.LastName;
+//            return LastName == other.FirstName && LastName == other.FirstName;
+//            return LastName == other.LastName;
         }
         public ContactData(string firstName, string lastName, string middleName, string nickname, string email)
         {
