@@ -9,9 +9,11 @@ namespace WebaddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            GroupData group = new GroupData("aaa");
-            group.Header = "ddd";
-            group.Footer = "fff";
+            GroupData group = new GroupData("aaa")
+            {
+                Header = "ddd",
+                Footer = "fff"
+            };
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
 
@@ -27,9 +29,11 @@ namespace WebaddressbookTests
         [Test]
         public void EmptyGroupCreationTest()
         {
-            GroupData group = new GroupData("");
-            group.Header = "";
-            group.Footer = "";
+            GroupData group = new GroupData("")
+            {
+                Header = "",
+                Footer = ""
+            };
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);

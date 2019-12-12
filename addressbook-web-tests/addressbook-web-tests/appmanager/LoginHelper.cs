@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace WebaddressbookTests
 {
@@ -20,7 +21,6 @@ namespace WebaddressbookTests
                     }
                 Logout();
             }
-
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
@@ -42,11 +42,13 @@ namespace WebaddressbookTests
         public bool IsLoggedIn(AccountData account)
         {
             return IsLoggedIn()
-                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
-                    == "(" + account.Username + ")";
-
+                && GetLoggetUserName() == account.Username;
         }
 
-
+        public string GetLoggetUserName()
+        {
+           string text =  driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text;
+           return text.Substring(1, text.Length - 2);
+        }
     }
 }

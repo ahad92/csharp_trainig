@@ -33,7 +33,7 @@ namespace WebaddressbookTests
             app.Auth.Login(account);
 
             //verification
-            Assert.IsTrue(app.Auth.IsLoggedIn(account));
+            Assert.IsFalse(app.Auth.IsLoggedIn(account));
         }
     }
 }
