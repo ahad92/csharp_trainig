@@ -4,32 +4,13 @@ namespace WebaddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstName;
-        private string lastName;
-        private string middleName;
-        private string nickname;
-        private string email;
-
         public ContactData(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
         }
 
-        public bool Equals(ContactData other)
-        {
-            if (object.ReferenceEquals(other, null))
-            {
-                return false;
-            }
-            if (object.ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            return FirstName == other.FirstName && LastName == other.LastName;
-//            return LastName == other.FirstName && LastName == other.FirstName;
-//            return LastName == other.LastName;
-        }
+
         public ContactData(string firstName, string lastName, string middleName, string nickname, string email)
         {
             FirstName = firstName;
@@ -50,6 +31,25 @@ namespace WebaddressbookTests
         public string Nickname { get; set; }
 
         public string Id { get; set; }
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public string MobilePhone { get; set; }
+
+        public bool Equals(ContactData other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return FirstName == other.FirstName && LastName == other.LastName;
+            //            return LastName == other.FirstName && LastName == other.FirstName;
+            //            return LastName == other.LastName;
+        }
 
         public override string ToString()
         {

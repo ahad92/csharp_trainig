@@ -15,12 +15,37 @@ namespace WebaddressbookTests
 
         public ContactHelper Create(ContactData contact)
         {
-                manager.Navigator.GoToAddContactsPage();
-                InitContactCreation();
-                FillContactForm(contact);
-                SubmitContactCreation();
-                ReturnToHomePage();
+            manager.Navigator.GoToAddContactsPage();
+            InitContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToHomePage();
             return this;
+        }
+
+        public ContactHelper GetContactInformationFromTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContactHelper GetContactInformationFromForm(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModification(0);
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastame")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string modilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = modilePhone,
+                WorkPhone = workPhone
+            };
         }
 
         public int GetContactCount()
