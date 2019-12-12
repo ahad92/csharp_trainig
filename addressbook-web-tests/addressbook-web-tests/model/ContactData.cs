@@ -10,7 +10,6 @@ namespace WebaddressbookTests
             LastName = lastName;
         }
 
-
         public ContactData(string firstName, string lastName, string middleName, string nickname, string email)
         {
             FirstName = firstName;
@@ -31,9 +30,13 @@ namespace WebaddressbookTests
         public string Nickname { get; set; }
 
         public string Id { get; set; }
+
         public string Address { get; set; }
+
         public string HomePhone { get; set; }
+
         public string WorkPhone { get; set; }
+
         public string MobilePhone { get; set; }
 
         public bool Equals(ContactData other)

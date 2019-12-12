@@ -25,7 +25,13 @@ namespace WebaddressbookTests
 
         public ContactHelper GetContactInformationFromTable()
         {
-            throw new NotImplementedException();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                .FindElement(By.TagName("td"));
+            string lastName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allPhones = cells[5].Text;
+
         }
 
         public ContactHelper GetContactInformationFromForm(int index)
@@ -38,7 +44,6 @@ namespace WebaddressbookTests
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string modilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
-
             return new ContactData(firstName, lastName)
             {
                 Address = address,

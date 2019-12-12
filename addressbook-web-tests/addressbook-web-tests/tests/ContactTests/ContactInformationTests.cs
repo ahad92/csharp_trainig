@@ -1,12 +1,22 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_tests.tests
+namespace WebaddressbookTests
 {
-    class ContactInformationTests
+    [TestFixture]
+    public class ContactCreationTest : AuthTestBase
     {
+        [Test]
+        public void TestContactInformation()
+        {
+            app.Contacts.GetContactInformationFromTable();
+            app.Contacts.GetContactInformationFromForm();
+        }
     }
 }
+
+
