@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 namespace WebaddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTest : AuthTestBase
+    public class ContactInformationTest : AuthTestBase
     {
         [Test]
         public void TestContactInformation()
         {
-            app.Contacts.GetContactInformationFromTable();
-            app.Contacts.GetContactInformationFromForm();
+            ContactData fromTable =  app.Contacts.GetContactInformationFromTable(0);
+            ContactData fromForm =  app.Contacts.GetContactInformationFromForm(0);
+
+            //verification
+            Assert.AreEqual(fromTable, fromForm);
+            Assert.AreEqual(fromTable.Address,fromForm.Address);
+            Assert.AreEqual(fromTable.AllPhones,fromForm.AllPhones);
         }
     }
 }

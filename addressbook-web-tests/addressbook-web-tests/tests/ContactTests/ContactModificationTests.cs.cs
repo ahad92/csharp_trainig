@@ -21,7 +21,7 @@ namespace WebaddressbookTests
                 app.Contacts.Create(newContactData);
             }
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.Modify(0, 0, newContactData);
+            app.Contacts.Modify(0, newContactData);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();

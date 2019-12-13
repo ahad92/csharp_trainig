@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace WebaddressbookTests.tests
+namespace WebaddressbookTests
 {
     [TestFixture]
     class ContactRemovalTests : AuthTestBase
