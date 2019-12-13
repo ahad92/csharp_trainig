@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace WebaddressbookTests
 {
@@ -66,8 +67,9 @@ namespace WebaddressbookTests
             {
                 return "";
             }
-           return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+ "\r\n";
-           }
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+            // return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+ "\r\n";
+        }
 
         public bool Equals(ContactData other)
         {

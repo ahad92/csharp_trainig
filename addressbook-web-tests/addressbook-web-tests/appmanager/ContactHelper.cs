@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 
 namespace WebaddressbookTests
@@ -29,6 +30,7 @@ namespace WebaddressbookTests
         }
 
         private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
             if (contactCache == null)
@@ -71,13 +73,9 @@ namespace WebaddressbookTests
             return IsElementPresent(By.Name("selected[]"));
         }
 
-        public ContactHelper Modify(int contactNum,ContactData newContactData)
+        public ContactHelper Modify(int contactNum, ContactData newContactData)
         {
             manager.Navigator.GoToHomePage();
-            if (!IsContactExist())
-            {
-                Create(newContactData);
-            }
             SelectContact(contactNum);
             InitContactModification(contactNum);
             FillContactForm(newContactData);
@@ -101,8 +99,7 @@ namespace WebaddressbookTests
 
         private ContactHelper InitContactModification(int index)
         {
-            //              driver.FindElement(By.XPath($"//tr[@name ='entry'][{index+1}]//input[@type='checkbox']/../..//img[@alt='Edit']")).Click();
-            driver.FindElements(By.Name("entry"))[index + 1]
+            driver.FindElements(By.Name("entry"))[index]
                .FindElements(By.TagName("td"))[7]
                .FindElement(By.TagName("a")).Click();
 
@@ -144,6 +141,14 @@ namespace WebaddressbookTests
                 WorkPhone = workPhone
             };
         }
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.GoToHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
+        }
+
         public ContactHelper SelectContact(int index)
         {
            driver.FindElement(By.XPath($"//tr[@name ='entry'][{index+1}]//input[@type='checkbox']")).Click();
