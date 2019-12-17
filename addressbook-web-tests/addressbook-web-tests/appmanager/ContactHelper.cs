@@ -116,7 +116,10 @@ namespace WebaddressbookTests
             string address = cells[3].Text;
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
-            string homePage = cells[9].GetAttribute("title");
+            string homePage = driver.FindElement(By.XPath($"//table[@id='maintable']//tr[' + {index + 1} + ']//td[10]//a//img")).GetAttribute("title");
+    //        string homePage = cells[9].GetAttribute("title");
+            
+
             return new ContactData(firstName, lastName)
             {
                 Address = address,
@@ -150,7 +153,7 @@ namespace WebaddressbookTests
                 Email1 = email,
                 Email2 = email2,
                 Email3 = email3,
-                HomePage = homePage
+                HomePage = "http://" + homePage
             };
         }
         public int GetNumberOfSearchResults()
