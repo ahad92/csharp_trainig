@@ -23,6 +23,16 @@ namespace WebaddressbookTests
             Assert.AreEqual(fromTable.AllEmails,fromForm.AllEmails);
             Assert.AreEqual(fromTable.HomePage,fromForm.HomePage);
         }
+
+        public void TestContactDatiledInformation()
+        {
+            string fromTable = app.Contacts.GetContactInformationFromDetails(0);
+            string fromForm = app.Contacts.GetAllContactInformationFromForm(0);
+
+            //verification
+            Assert.AreEqual(fromTable, fromForm);
+
+        }
     }
 }
 

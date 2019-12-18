@@ -7,11 +7,17 @@ namespace WebaddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string fullName;
 
         public ContactData(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
+        }
+
+        public ContactData()
+        {
+            FullName = fullName;
         }
 
         public ContactData(string firstName, string lastName, string middleName, string nickname, string email)
@@ -89,6 +95,27 @@ namespace WebaddressbookTests
             }
         }
 
+        public string FullName
+        {
+            get
+            {
+                if (fullName != null)
+                {
+                    return fullName;
+                }
+                else
+                    return FirstName + " " + LastName;
+            }
+            set
+            {
+                fullName = value;
+            }
+        }
+
+        public String GetFullString()
+        {
+            return FullName + Address + AllPhones + AllEmails;
+        }
 
         private string CleanUp(string phone)
         {

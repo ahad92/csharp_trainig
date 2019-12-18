@@ -137,7 +137,7 @@ namespace WebaddressbookTests
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string modilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
@@ -148,14 +148,138 @@ namespace WebaddressbookTests
             {
                 Address = address,
                 HomePhone = homePhone,
-                MobilePhone = modilePhone,
+                MobilePhone = mobilePhone,
                 WorkPhone = workPhone,
                 Email1 = email,
                 Email2 = email2,
                 Email3 = email3,
-                HomePage = "http://" + homePage
+                HomePage = "http://" + homePage,
+
             };
         }
+
+        public string getContactInformationFromContactDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            GoToContactDetailedInfo(index);
+            return driver.FindElement(By.Id("content")).Text;
+        }
+
+        private string GetDateFormatted(string day, string month, string year)
+        {
+            var bday = String.Empty;
+            bday = bday + (String.IsNullOrEmpty(day) || day.Equals("-") ? String.Empty : $"{day}. ");
+            bday = bday + (String.IsNullOrEmpty(month) || month.Equals("-") ? String.Empty : $"{month} ");
+            bday = bday + (String.IsNullOrEmpty(year) ? String.Empty : $"{year}");
+            return bday;
+        }
+
+        public string GetAllContactInformationFromForm(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModification(0);
+            string allInfo;
+
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string secondaryPhone = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+
+            //detailed information
+            string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
+            string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
+            string title = driver.FindElement(By.Name("title")).GetAttribute("value");
+            string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
+            string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
+            string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
+            string company = driver.FindElement(By.Name("company")).GetAttribute("value");
+            // birthday & anniversary 
+            string birthday =
+                GetDateFormatted(driver.FindElement(By.Name("bday")).GetAttribute("value"),
+                driver.FindElement(By.Name("bmonth")).GetAttribute("value"),
+                driver.FindElement(By.Name("byear")).GetAttribute("value"));
+
+            string anniversary =
+                GetDateFormatted(driver.FindElement(By.Name("aday")).GetAttribute("value"),
+                driver.FindElement(By.Name("amonth")).FindElement(By.CssSelector("option[selected=selected]")).Text,
+                driver.FindElement(By.Name("ayear")).GetAttribute("value"));
+
+
+            string personInfo = ((String.IsNullOrEmpty(firstName.Trim()) ? String.Empty : $"{firstName} ") +
+                (String.IsNullOrEmpty(middlename.Trim()) ? String.Empty : $"{middlename} ") +
+                (String.IsNullOrEmpty(lastName.Trim()) ? String.Empty : $"{lastName}")).Trim();
+
+            allInfo = personInfo +
+                Environment.NewLine +
+                (String.IsNullOrEmpty(nickname) ? String.Empty : $"{nickname}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(title) ? String.Empty : $"{title}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(company) ? String.Empty : $"{company}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(address) ? String.Empty : $"{address}{Environment.NewLine}") +
+                Environment.NewLine +
+                (String.IsNullOrEmpty(homePhone) ? String.Empty : $"H: {homePhone}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(mobilePhone) ? String.Empty : $"M: {mobilePhone}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(workPhone) ? String.Empty : $"W: {workPhone}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(fax) ? String.Empty : $"F: {fax}{Environment.NewLine}") +
+                Environment.NewLine +
+                (String.IsNullOrEmpty(email) ? String.Empty : $"{email}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(email2) ? String.Empty : $"{email2}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(email3) ? String.Empty : $"{email3}{Environment.NewLine}") +
+                $"Homepage:{Environment.NewLine}{homepage}{Environment.NewLine}" +
+                Environment.NewLine +
+                (String.IsNullOrEmpty(birthday) ? String.Empty : $"Birthday {birthday}{Environment.NewLine}") +
+                (String.IsNullOrEmpty(anniversary) ? String.Empty : $"Anniversary {anniversary}{Environment.NewLine}") +
+                Environment.NewLine +
+                (String.IsNullOrEmpty(address2) ? String.Empty : $"{address2}{Environment.NewLine}") +
+                Environment.NewLine +
+                (String.IsNullOrEmpty(secondaryPhone) ? String.Empty : $"P: {secondaryPhone}{Environment.NewLine}") +
+                Environment.NewLine +
+                notes;
+
+            return allInfo;
+        }
+
+        private void GoToContactDetailedInfo(int index)
+        {
+            driver.FindElement(By.XPath($"//table[@id='maintable']//tr[' + {index + 1} + ']//td[7]//a//img")).Click();
+        }
+
+        public string GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            GoToContactDetailedInfo(index);
+            return driver.FindElement(By.Id("content")).Text;
+        }
+        public String GetContactInformationFromDetailsAsString(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            GoToContactDetailedInfo(index);
+
+            string textData = driver.FindElement(By.XPath(@"//div[@id='content']")).Text;
+            Regex r = new Regex(@"([MWH]:\s)|(\r)|(\n)");
+
+            return r.Replace(textData, "");
+        }
+
+        private String getAllPhones(string phonesFromForm)
+        {
+            String retVal = "";
+            retVal = String.Join("\n",
+                phonesFromForm.Split(new[] { "\r\n" }, StringSplitOptions.None)
+                                .Select(phone => phone.Substring(phone.IndexOf(':') + 1))
+                );
+
+            return retVal;
+        }
+
         public int GetNumberOfSearchResults()
         {
             manager.Navigator.GoToHomePage();
@@ -181,6 +305,15 @@ namespace WebaddressbookTests
             Type(By.Name("lastname"), contact.LastName);
             Type(By.Name("nickname"), contact.Nickname);
             Type(By.Name("email"), contact.Email);
+            
+            Type(By.Name("email1"), contact.Email1);
+            Type(By.Name("email2"), contact.Email2);           
+            Type(By.Name("email3"), contact.Email3);
+
+            Type(By.Name("home"), contact.HomePhone);
+            Type(By.Name("mobile"), contact.MobilePhone);
+            Type(By.Name("work"), contact.WorkPhone);
+
             return this;
         }
         public ContactHelper ReturnToHomePage()
