@@ -58,8 +58,8 @@ namespace WebaddressbookTests
             RemoveContact();
             AcceptAlert();
             AssertThatContactDeleted();
-            manager.Navigator.GoToGroupsPage(); // it need for updating contacts data in home page 
-            manager.Navigator.GoToHomePage();
+            manager.Navigator.GoToGroupsPage();
+            manager.Navigator.GoToHomePage(); // it need for updating contacts data in home page 
         }
 
         private bool AssertThatContactDeleted()
