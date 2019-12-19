@@ -117,9 +117,7 @@ namespace WebaddressbookTests
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
             string homePage = driver.FindElement(By.XPath($"//table[@id='maintable']//tr[' + {index + 1} + ']//td[10]//a//img")).GetAttribute("title");
-    //        string homePage = cells[9].GetAttribute("title");
             
-
             return new ContactData(firstName, lastName)
             {
                 Address = address,
@@ -154,7 +152,6 @@ namespace WebaddressbookTests
                 Email2 = email2,
                 Email3 = email3,
                 HomePage = "http://" + homePage,
-
             };
         }
 
@@ -168,9 +165,9 @@ namespace WebaddressbookTests
         private string GetDateFormatted(string day, string month, string year)
         {
             var bday = String.Empty;
-            bday = bday + (String.IsNullOrEmpty(day) || day.Equals("-") ? String.Empty : $"{day}. ");
-            bday = bday + (String.IsNullOrEmpty(month) || month.Equals("-") ? String.Empty : $"{month} ");
-            bday = bday + (String.IsNullOrEmpty(year) ? String.Empty : $"{year}");
+            bday += (String.IsNullOrEmpty(day) || day.Equals("-") ? String.Empty : $"{day}. ");
+            bday += (String.IsNullOrEmpty(month) || month.Equals("-") ? String.Empty : $"{month} ");
+            bday += (String.IsNullOrEmpty(year) ? String.Empty : $"{year}");
             return bday;
         }
 
@@ -214,37 +211,37 @@ namespace WebaddressbookTests
                 driver.FindElement(By.Name("ayear")).GetAttribute("value"));
 
 
-            string personInfo = ((String.IsNullOrEmpty(firstName.Trim()) ? String.Empty : $"{firstName} ") +
-                (String.IsNullOrEmpty(middlename.Trim()) ? String.Empty : $"{middlename} ") +
-                (String.IsNullOrEmpty(lastName.Trim()) ? String.Empty : $"{lastName}")).Trim();
+            //string personInfo = ((String.IsNullOrEmpty(firstName.Trim()) ? String.Empty : $"{firstName} ") +
+            //    (String.IsNullOrEmpty(middlename.Trim()) ? String.Empty : $"{middlename} ") +
+            //    (String.IsNullOrEmpty(lastName.Trim()) ? String.Empty : $"{lastName}")).Trim();
 
-            allInfo = personInfo +
-                Environment.NewLine +
-                (String.IsNullOrEmpty(nickname) ? String.Empty : $"{nickname}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(title) ? String.Empty : $"{title}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(company) ? String.Empty : $"{company}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(address) ? String.Empty : $"{address}{Environment.NewLine}") +
-                Environment.NewLine +
-                (String.IsNullOrEmpty(homePhone) ? String.Empty : $"H: {homePhone}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(mobilePhone) ? String.Empty : $"M: {mobilePhone}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(workPhone) ? String.Empty : $"W: {workPhone}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(fax) ? String.Empty : $"F: {fax}{Environment.NewLine}") +
-                Environment.NewLine +
-                (String.IsNullOrEmpty(email) ? String.Empty : $"{email}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(email2) ? String.Empty : $"{email2}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(email3) ? String.Empty : $"{email3}{Environment.NewLine}") +
-                $"Homepage:{Environment.NewLine}{homepage}{Environment.NewLine}" +
-                Environment.NewLine +
-                (String.IsNullOrEmpty(birthday) ? String.Empty : $"Birthday {birthday}{Environment.NewLine}") +
-                (String.IsNullOrEmpty(anniversary) ? String.Empty : $"Anniversary {anniversary}{Environment.NewLine}") +
-                Environment.NewLine +
-                (String.IsNullOrEmpty(address2) ? String.Empty : $"{address2}{Environment.NewLine}") +
-                Environment.NewLine +
-                (String.IsNullOrEmpty(secondaryPhone) ? String.Empty : $"P: {secondaryPhone}{Environment.NewLine}") +
-                Environment.NewLine +
-                notes;
+            //allInfo = personInfo +
+            //    Environment.NewLine +
+            //    (String.IsNullOrEmpty(nickname) ? String.Empty : $"{nickname}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(title) ? String.Empty : $"{title}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(company) ? String.Empty : $"{company}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(address) ? String.Empty : $"{address}{Environment.NewLine}") +
+            //    Environment.NewLine +
+            //    (String.IsNullOrEmpty(homePhone) ? String.Empty : $"H: {homePhone}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(mobilePhone) ? String.Empty : $"M: {mobilePhone}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(workPhone) ? String.Empty : $"W: {workPhone}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(fax) ? String.Empty : $"F: {fax}{Environment.NewLine}") +
+            //    Environment.NewLine +
+            //    (String.IsNullOrEmpty(email) ? String.Empty : $"{email}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(email2) ? String.Empty : $"{email2}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(email3) ? String.Empty : $"{email3}{Environment.NewLine}") +
+            //    $"Homepage:{Environment.NewLine}{homepage}{Environment.NewLine}" +
+            //    Environment.NewLine +
+            //    (String.IsNullOrEmpty(birthday) ? String.Empty : $"Birthday {birthday}{Environment.NewLine}") +
+            //    (String.IsNullOrEmpty(anniversary) ? String.Empty : $"Anniversary {anniversary}{Environment.NewLine}") +
+            //    Environment.NewLine +
+            //    (String.IsNullOrEmpty(address2) ? String.Empty : $"{address2}{Environment.NewLine}") +
+            //    Environment.NewLine +
+            //    (String.IsNullOrEmpty(secondaryPhone) ? String.Empty : $"P: {secondaryPhone}{Environment.NewLine}") +
+            //    Environment.NewLine +
+            //    notes;
 
-            return allInfo;
+            //return allInfo;
         }
 
         private void GoToContactDetailedInfo(int index)
@@ -267,17 +264,6 @@ namespace WebaddressbookTests
             Regex r = new Regex(@"([MWH]:\s)|(\r)|(\n)");
 
             return r.Replace(textData, "");
-        }
-
-        private String getAllPhones(string phonesFromForm)
-        {
-            String retVal = "";
-            retVal = String.Join("\n",
-                phonesFromForm.Split(new[] { "\r\n" }, StringSplitOptions.None)
-                                .Select(phone => phone.Substring(phone.IndexOf(':') + 1))
-                );
-
-            return retVal;
         }
 
         public int GetNumberOfSearchResults()
@@ -313,6 +299,8 @@ namespace WebaddressbookTests
             Type(By.Name("home"), contact.HomePhone);
             Type(By.Name("mobile"), contact.MobilePhone);
             Type(By.Name("work"), contact.WorkPhone);
+            Type(By.Name("address"), contact.Address);
+            Type(By.Name("homepage"), contact.HomePage);
 
             return this;
         }

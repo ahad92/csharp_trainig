@@ -9,9 +9,19 @@ namespace WebaddressbookTests
         [Test]
         public void ContactCreationTests()
         {
-            ContactData contact = new ContactData("Myname", "MyLastName");
-            contact.Nickname = "MyNickname";
-            contact.Email = "testemail@mailbox213.com";
+            ContactData contact = new ContactData("Myname", "MyLastName")
+            {
+                Nickname = "MyNickname",
+                Email = "1mail@mail.com",
+                Email2 = "2mail@mail.com",
+                Email3 = "2mail@mail.com",
+                Address = "StreetTest",
+                HomePage = "MytestHomePage",
+                HomePhone = "+111111111",
+                MobilePhone = "+22222222",
+                WorkPhone = "+33333333",
+            };
+
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
