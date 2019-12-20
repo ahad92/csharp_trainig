@@ -30,6 +30,7 @@ namespace WebaddressbookTests
                 return;
             }
             driver.FindElement(By.LinkText("groups")).Click();
+            driver.FindElement(By.LinkText("groups")).Click();
         }
 
         public NavigationHelper GoToAddContactsPage()
