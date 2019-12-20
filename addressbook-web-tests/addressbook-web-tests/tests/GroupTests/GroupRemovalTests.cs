@@ -18,6 +18,7 @@ namespace WebaddressbookTests
             {
                 app.Groups.Create(newData);
             }
+
             app.Groups.Remove(0);
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
             
