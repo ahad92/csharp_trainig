@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,13 +16,18 @@ namespace WebaddressbookTests
             List<GroupData> groups = new List<GroupData>();
             for (int i = 0; i < 5; i++)
             {
-                groups.Add(new GroupData(GenerateRandomString(30))
+                groups.Add(new GroupData(GenerateRandomString(10))
                 {
-                    Header = GenerateRandomString(100),
-                    Footer = GenerateRandomString(100)
+                    Header = GenerateRandomString(10),
+                    Footer = GenerateRandomString(10)
                 });
             }
             return groups;
+        }
+
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>(File.ReadAllText(@"groups.json"));
         }
 
         public static IEnumerable<GroupData> GroupDataFromXMLFile()
@@ -31,7 +37,7 @@ namespace WebaddressbookTests
                 .Deserialize(new StreamReader(@"groups.xml"));        
         }
 
-        [Test, TestCaseSource("GroupDataFromXMLFile")]
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
