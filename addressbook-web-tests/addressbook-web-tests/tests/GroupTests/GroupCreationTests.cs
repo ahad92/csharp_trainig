@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace WebaddressbookTests
 {
@@ -23,22 +24,14 @@ namespace WebaddressbookTests
             return groups;
         }
 
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromXMLFile()
         {
-            List<GroupData> groups = new List<GroupData>();
-            string[] lines = File.ReadAllLines(@"groups.csv");
-            foreach (string l in lines)
-            {
-                string[] parts = l.Split(',');
-                groups.Add(new GroupData(parts[0]){
-                    Header = parts[1],
-                    Footer = parts[2]
-                });
-            }
-            return groups;
+            return(List<GroupData>)
+                new XmlSerializer(typeof(List<GroupData>))
+                .Deserialize(new StreamReader(@"groups.xml"));        
         }
 
-        [Test, TestCaseSource("GroupDataFromFile")]
+        [Test, TestCaseSource("GroupDataFromXMLFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
