@@ -5,7 +5,6 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Xml.Serialization;
 using WebaddressbookTests;
-
 namespace addressbook_test_data_generators
 {
     class Program
@@ -26,14 +25,11 @@ namespace addressbook_test_data_generators
             }
             if (format == "excel")
             {
-
                 WriteGroupsToExcellFile(groups, filename);
-
             }
             else
             {
                 StreamWriter writer = new StreamWriter(filename);
-
                 if (format == "csv")
                 {
                     WriteGroupsToCsvFile(groups, writer);
@@ -50,12 +46,9 @@ namespace addressbook_test_data_generators
                 {
                     System.Console.Out.Write("Unrecognized format" + format);
                 }
-
                 writer.Close();
             }
-
         }
-
         static void WriteGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)
         {
             foreach (GroupData group in groups)
@@ -64,17 +57,14 @@ namespace addressbook_test_data_generators
                     group.Name, group.Header, group.Footer));
             }
         }
-
         static void WriteGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
         }
-
         static void WriteGroupsToJsonlFile(List<GroupData> groups, StreamWriter writer)
         {
-            writer.Write(JsonConvert.SerializeObject(groups,Formatting.Indented));
+            writer.Write(JsonConvert.SerializeObject(groups, Formatting.Indented));
         }
-
         static void WriteGroupsToExcellFile(List<GroupData> groups, string filename)
         {
             Excel.Application app = new Excel.Application();
@@ -82,7 +72,6 @@ namespace addressbook_test_data_generators
             Excel.Workbook wb = app.Workbooks.Add();
             Excel.Worksheet sheet = wb.ActiveSheet;
             sheet.Cells[1, 1] = "test";
-
             int row = 1;
             foreach (GroupData group in groups)
             {
@@ -90,7 +79,6 @@ namespace addressbook_test_data_generators
                 sheet.Cells[row, 2] = group.Header;
                 sheet.Cells[row, 3] = group.Footer;
                 row++;
-
             }
             string fullPath = Path.Combine(Directory.GetCurrentDirectory(), filename);
             File.Delete(fullPath);
@@ -98,3 +86,31 @@ namespace addressbook_test_data_generators
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
