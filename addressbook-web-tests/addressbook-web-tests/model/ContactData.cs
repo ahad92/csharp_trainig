@@ -15,7 +15,7 @@ namespace WebaddressbookTests
             LastName = lastName;
         }
 
-        public ContactData()
+        public ContactData(string v)
         {
         }
 
