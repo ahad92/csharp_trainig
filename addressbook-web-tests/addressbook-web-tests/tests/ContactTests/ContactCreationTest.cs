@@ -20,6 +20,7 @@ namespace WebaddressbookTests
             }
             return contacts;
         }
+
         [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTests()
         {
@@ -39,11 +40,20 @@ namespace WebaddressbookTests
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
             List<ContactData> newContacts = app.Contacts.GetContactList();
+            ContactData toBeAdded = newContacts[0];
+
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contacts in oldContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeAdded.Id);
+            }
+
         }
+
         public static IEnumerable<ContactData> ContactDataFromXmlFile()
         {
             List<ContactData> contacts = new List<ContactData>();
@@ -57,3 +67,5 @@ namespace WebaddressbookTests
         }
     }
 }
+
+    
