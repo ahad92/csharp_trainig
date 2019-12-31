@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace WebaddressbookTests
@@ -17,6 +18,11 @@ namespace WebaddressbookTests
 
         public ContactData()
         {
+        }
+
+        internal static List<ContactData> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         public ContactData(string v)
