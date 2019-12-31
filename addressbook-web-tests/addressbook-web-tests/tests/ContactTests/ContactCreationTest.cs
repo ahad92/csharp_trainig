@@ -21,21 +21,10 @@ namespace WebaddressbookTests
             return contacts;
         }
 
-        [Test, TestCaseSource("ContactDataFromXmlFile")]
-        public void ContactCreationTests()
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
+        public void ContactCreationTests(ContactData contact)
         {
-            ContactData contact = new ContactData("Myname", "MyLastName")
-            {
-                Nickname = "MyNickname",
-                Email = "1mail@mail.com",
-                Email2 = "2mail@mail.com",
-                Email3 = "2mail@mail.com",
-                Address = "StreetTest",
-                HomePage = "MytestHomePage",
-                HomePhone = "+111111111",
-                MobilePhone = "+22222222",
-                WorkPhone = "+33333333",
-            };
+
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
@@ -60,6 +49,7 @@ namespace WebaddressbookTests
             return (List<ContactData>)
                 new XmlSerializer(typeof(List<ContactData>)).Deserialize(new StreamReader(@"contacts.xml"));
         }
+
         public static IEnumerable<ContactData> ContactDataFromJsonFile()
         {
             List<ContactData> contacts = new List<ContactData>();

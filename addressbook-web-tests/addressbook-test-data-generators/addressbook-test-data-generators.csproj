@@ -49,12 +49,6 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\addressbook-web-tests\addressbook-web-tests.csproj">
-      <Project>{dcdc224b-154f-4e60-9ca4-c1cb490087dc}</Project>
-      <Name>addressbook-web-tests</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -82,6 +76,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\addressbook-web-tests\addressbook-web-tests.csproj">
+      <Project>{ec93d102-a970-4a95-b575-0bafce287d50}</Project>
+      <Name>addressbook-web-tests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
