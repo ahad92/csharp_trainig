@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>addressbook_test_data_generators</RootNamespace>
     <AssemblyName>addressbook-test-data-generators</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -84,7 +85,61 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="bin\coretools\CrmSvcUtil.exe.config" />
+    <None Include="bin\coretools\LicenseTerms.docx" />
+    <None Include="bin\coretools\SolutionPackager.exe.config" />
+    <None Include="bin\Debug\contacts.csv" />
+    <None Include="bin\Debug\contacts.excel" />
+    <None Include="bin\Debug\contacts.json" />
+    <None Include="bin\Debug\groups.csv" />
+    <None Include="bin\Debug\groups.excel" />
+    <None Include="bin\Debug\groups.json" />
+    <None Include="bin\Debug\packages.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\coretools\CrmSvcUtil.exe" />
+    <Content Include="bin\coretools\CrmSvcUtil.xml" />
+    <Content Include="bin\coretools\Microsoft.Crm.Sdk.Proxy.dll" />
+    <Content Include="bin\coretools\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
+    <Content Include="bin\coretools\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll" />
+    <Content Include="bin\coretools\Microsoft.Rest.ClientRuntime.dll" />
+    <Content Include="bin\coretools\Microsoft.Xrm.Sdk.Deployment.dll" />
+    <Content Include="bin\coretools\Microsoft.Xrm.Sdk.dll" />
+    <Content Include="bin\coretools\Microsoft.Xrm.Tooling.Connector.dll" />
+    <Content Include="bin\coretools\Microsoft.Xrm.Tooling.CrmConnectControl.dll" />
+    <Content Include="bin\coretools\Microsoft.Xrm.Tooling.Ui.Styles.dll" />
+    <Content Include="bin\coretools\Newtonsoft.Json.dll" />
+    <Content Include="bin\coretools\Other Redistributable.txt" />
+    <Content Include="bin\coretools\SolutionPackager.exe" />
+    <Content Include="bin\coretools\System.ValueTuple.dll" />
+    <Content Include="bin\Debug\addressbook-test-data-generators.exe" />
+    <Content Include="bin\Debug\addressbook-test-data-generators.pdb" />
+    <Content Include="bin\Debug\addressbook-web-tests.dll" />
+    <Content Include="bin\Debug\addressbook-web-tests.pdb" />
+    <Content Include="bin\Debug\contacts.xml" />
+    <Content Include="bin\Debug\groups.xml" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml" />
+    <Content Include="bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\nunit.framework.dll" />
+    <Content Include="bin\Debug\nunit.framework.pdb" />
+    <Content Include="bin\Debug\nunit.framework.xml" />
+    <Content Include="bin\Debug\WebDriver.dll" />
+    <Content Include="bin\Debug\WebDriver.Support.dll" />
+    <Content Include="bin\Debug\WebDriver.Support.xml" />
+    <Content Include="bin\Debug\WebDriver.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\netcoreapp3.0\" />
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
