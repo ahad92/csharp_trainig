@@ -20,8 +20,13 @@ namespace WebaddressbookTests
             {
                 app.Contacts.Create(newContactData);
             }
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-            app.Contacts.Modify(0, newContactData);
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData oldContactData = oldContacts[0];
+
+
+            //            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Modify(oldContactData, newContactData);
+
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
@@ -29,7 +34,15 @@ namespace WebaddressbookTests
             oldContacts[0].LastName = newContactData.LastName;
             oldContacts.Sort();
             newContacts.Sort();
-            Assert.AreEqual(newContacts, oldContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldContactData.Id)
+                {
+                    Assert.AreEqual(newContactData.FirstName, contact.FirstName);
+                    Assert.AreEqual(newContactData.LastName, contact.LastName);
+                }
+            }
         }
     }
 }

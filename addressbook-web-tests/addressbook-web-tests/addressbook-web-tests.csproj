@@ -117,6 +117,7 @@
     <Compile Include="tests\ContactTests\ContactInformationTests.cs" />
     <Compile Include="tests\ContactTests\ContactModificationTests.cs.cs" />
     <Compile Include="tests\ContactTests\ContactRemovalTests.cs" />
+    <Compile Include="tests\ContactTests\ContactTestBase.cs" />
     <Compile Include="tests\ContactTests\SearchTests.cs" />
     <Compile Include="tests\GroupTests\GroupModificationTests.cs" />
     <Compile Include="tests\GroupTests\GroupRemovalTests.cs" />

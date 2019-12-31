@@ -12,7 +12,8 @@ namespace WebaddressbookTests
             GroupData newData = new GroupData("editedName");
             
             app.Navigator.GoToGroupsPage();
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+    //        List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetAll();
 
             if (!app.Groups.IsGroupExist())
             {

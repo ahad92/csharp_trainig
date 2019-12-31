@@ -31,6 +31,17 @@ namespace WebaddressbookTests
 
         private List<ContactData> contactCache = null;
 
+        public ContactHelper Modify(ContactData oldContactData, ContactData newContactData)
+        {
+            manager.Navigator.GoToHomePage();
+
+            InitContactModification(oldContactData.Id);
+            FillContactForm(newContactData);
+            SubmitContactModification();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
         public List<ContactData> GetContactList()
         {
             if (contactCache == null)
@@ -77,10 +88,16 @@ namespace WebaddressbookTests
         {
             manager.Navigator.GoToHomePage();
             SelectContact(contactNum);
-            InitContactModification(contactNum);
+            InitContactModification(oldContactData.Id);
             FillContactForm(newContactData);
             SubmitContactModification();
             manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(string id)
+        {
+            driver.FindElement(By.XPath("//a[@href='edit.php?id=" + id + "']")).Click();
             return this;
         }
 

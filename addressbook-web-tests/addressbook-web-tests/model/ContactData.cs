@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace WebaddressbookTests
 {
+    [Table(Name = "addressbook")]
+
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
         private string allEmails;
-        private string fullName;
 
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
         public ContactData(string firstName, string lastName)
         {
             FirstName = firstName;
@@ -38,17 +45,29 @@ namespace WebaddressbookTests
             Email = email;
         }
 
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+        }
+
+        [Column(Name = "id"), PrimaryKey]
+        public string Id { get; set; }
+
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
 
-        public string MiddleName { get; set; }
-
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
 
         public string Email { get; set; }
 
         public string Nickname { get; set; }
 
-        public string Id { get; set; }
+        public string MiddleName { get; set; }
 
         public string Address { get; set; }
 
@@ -104,26 +123,9 @@ namespace WebaddressbookTests
             }
         }
 
-        public string FullName
-        {
-            get
-            {
-                if (fullName != null)
-                {
-                    return fullName;
-                }
-                else
-                    return FirstName + " " + LastName;
-            }
-            set
-            {
-                fullName = value;
-            }
-        }
-
         public String GetFullString()
         {
-            return FullName + Address + AllPhones + AllEmails;
+            return  Address + AllPhones + AllEmails;
         }
 
         private string CleanUp(string phone)
