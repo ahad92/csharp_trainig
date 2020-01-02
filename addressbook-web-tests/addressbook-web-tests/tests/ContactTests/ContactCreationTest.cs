@@ -25,10 +25,14 @@ namespace WebaddressbookTests
         public void ContactCreationTests(ContactData contact)
         {
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contacts.Create(contact);
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
+
             ContactData toBeAdded = newContacts[0];
 
             oldContacts.Add(contact);

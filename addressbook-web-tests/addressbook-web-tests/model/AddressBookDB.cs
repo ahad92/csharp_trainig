@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebaddressbookTests;
+using WebaddressbookTestss;
 
-namespace addressbook_web_tests.model
+namespace WebaddressbookTests
 {
     public class AddressBookDB : LinqToDB.Data.DataConnection
     {

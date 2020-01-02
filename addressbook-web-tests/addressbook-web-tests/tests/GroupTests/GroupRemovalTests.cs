@@ -1,35 +1,45 @@
 ﻿using NUnit.Framework;
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using NUnit.Framework;
 using System.Collections.Generic;
 
 namespace WebaddressbookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [Test]
-        public void TheGroupRemoveTest()
+        public void GroupRemoveTest()
         {
-            GroupData newData = new GroupData("editedName");
-            
+            GroupData group = new GroupData("editedName");
+            group.Header = "editedHeaderDel";
+            group.Footer = "editedFooterDEL";
+
             app.Navigator.GoToGroupsPage();
-    //        List<GroupData> oldGroups = app.Groups.GetGroupList();
-            List<GroupData> oldGroups = app.Groups.GetAll();
+            //        List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             if (!app.Groups.IsGroupExist())
             {
-                app.Groups.Create(newData);
+                app.Groups.Create(group);
             }
-
-            app.Groups.Remove(0);
-            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
-            
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             GroupData toBeRemoved = oldGroups[0];
-            oldGroups.RemoveAt(0);
-            Assert.AreEqual(oldGroups, newGroups);
-            foreach (GroupData group in newGroups)
+            app.Groups.Remove(toBeRemoved);
+
+
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
+
+            //  List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
+            if (oldGroups.Count > 0)
+                oldGroups.RemoveAt(0);
+
+            foreach (GroupData group1 in newGroups)
             {
-                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+                Assert.AreNotEqual(group1.Id, toBeRemoved.Id);
             }
         }
     }

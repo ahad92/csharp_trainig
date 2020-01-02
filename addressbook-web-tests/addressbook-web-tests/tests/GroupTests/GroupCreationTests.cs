@@ -9,7 +9,7 @@ using System.Linq;
 namespace WebaddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
@@ -74,14 +74,24 @@ namespace WebaddressbookTests
         [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
+            //  List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-            List<GroupData> newContacts = app.Groups.GetGroupList();
+           
+            List<GroupData> newGroups = GroupData.GetAll();
+            GroupData toBeAdded = newGroups[0];
+            // List<GroupData> newContacts = app.Groups.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
-            newContacts.Sort();
-            Assert.AreEqual(oldGroups, newContacts);
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData groups in oldGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeAdded.Id);
+            }
         }
         [Test]
         public void BadNameGroupCreationTest()
@@ -122,7 +132,6 @@ namespace WebaddressbookTests
             }
 
         }
-
 
     }
 }

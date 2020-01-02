@@ -54,19 +54,19 @@ namespace WebaddressbookTests
             return new List<GroupData>(groupCache);
         }
 
-        public GroupHelper Remove(int groupNum)
+        public GroupHelper Remove(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(groupNum);
+            SelectGroup(group.Id);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
 
-        public GroupHelper Modify(int groupNum, GroupData newData)
+        public GroupHelper Modify(GroupData oldData, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(groupNum);
+            SelectGroup(oldData.Id);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -85,7 +85,7 @@ namespace WebaddressbookTests
 
         public GroupHelper RemoveGroup()
         {
-            driver.FindElement(By.Name("delete")).Click();
+            driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
             groupCache = null;
             return this;
         }
@@ -128,9 +128,9 @@ namespace WebaddressbookTests
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
-        public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup(string id)
         {
-            driver.FindElement(By.XPath($"//div[@id='content']//span[{index+1}]//input[@name='selected[]']")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             return this;
         }
     }

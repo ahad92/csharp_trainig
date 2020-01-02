@@ -27,11 +27,13 @@ namespace WebaddressbookTests
         {
         }
 
-        internal static List<ContactData> GetAll()
+        public static List<ContactData> GetAll()
         {
-            throw new NotImplementedException();
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
         }
-
         public ContactData(string v)
         {
         }
@@ -45,14 +47,6 @@ namespace WebaddressbookTests
             Email = email;
         }
 
-
-        public static List<ContactData> GetAll()
-        {
-            using (AddressBookDB db = new AddressBookDB())
-            {
-                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
-            }
-        }
 
         [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }

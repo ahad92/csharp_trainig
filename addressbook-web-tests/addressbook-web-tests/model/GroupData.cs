@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using addressbook_web_tests.model;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using LinqToDB.Mapping;
 
 namespace WebaddressbookTests
@@ -11,6 +14,9 @@ namespace WebaddressbookTests
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
 
+        private string v1;
+        private string v2;
+
         public GroupData()
         {
         }
@@ -20,12 +26,24 @@ namespace WebaddressbookTests
             Name = name;
         }
 
-        public GroupData(string name, string header, string footer)
+        public GroupData(string name, string v1, string v2) : this(name)
         {
-            Name = name;
-            Header = header;
-            Footer = footer;
+            this.v1 = v1;
+            this.v2 = v2;
         }
+
+        [Column(Name = "group_name")]
+        public string Name { get; set; }
+
+        [Column(Name = "group_header")]
+        public string Header { get; set; }
+
+        [Column(Name = "group_footer")]
+        public string Footer { get; set; }
+
+        [Column(Name = "group_id"), PrimaryKey, Identity]
+        public string Id { get; set; }
+
         public bool Equals(GroupData other)
         {
             if (object.ReferenceEquals(other, null))
@@ -57,18 +75,6 @@ namespace WebaddressbookTests
             }
             return Name.CompareTo(other.Name);
         }
-
-        [Column(Name = "group_name")]
-        public string Name { get; set; }
-
-        [Column(Name = "group_header")]
-        public string Header { get; set; }
-
-        [Column(Name = "group_footer")]
-        public string Footer { get; set; }
-
-        [Column(Name = "group_id"), PrimaryKey, Identity]
-        public string Id { get; set; }
 
         public static List<GroupData> GetAll()
         {

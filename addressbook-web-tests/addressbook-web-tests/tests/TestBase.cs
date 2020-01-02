@@ -14,6 +14,7 @@ namespace WebaddressbookTests
             app = ApplicationManager.GetInstance();
         }
 
+        public static bool PERFORM_LONG_UI_CHEKS = false;
         public static Random rnd = new Random();
 
         public static string GenerateRandomString(int max)
