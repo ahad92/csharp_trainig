@@ -73,6 +73,24 @@ namespace WebaddressbookTests
             return contactCache;
         }
 
+        public ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+
+
+            SelectContactId(contact.Id);
+            RemoveContact();
+            AcceptAlert();
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
+        public ContactHelper SelectContactId(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            return this;
+        }
+
         public void Remove(int contactNum)
         {
            manager.Navigator.GoToHomePage();
@@ -152,7 +170,7 @@ namespace WebaddressbookTests
             string address = cells[3].Text;
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
-            string homePage = driver.FindElement(By.XPath($"//table[@id='maintable']//tr[' + {index + 1} + ']//td[10]//a//img")).GetAttribute("title");
+            string homePage = driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + (index + 2) + "]/td[10]/a/img")).GetAttribute("title");
             
             return new ContactData(firstName, lastName)
             {

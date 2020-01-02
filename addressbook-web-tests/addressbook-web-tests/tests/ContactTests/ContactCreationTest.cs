@@ -13,11 +13,8 @@ namespace WebaddressbookTests
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
             List<ContactData> contacts = new List<ContactData>();
-            for (int i = 0; i < 5; i++)
-            {
-                contacts.Add(new ContactData(GenerateRandomString(30), GenerateRandomString(30)));
-
-            }
+           
+                contacts.Add(new ContactData(GenerateRandomString(30), GenerateRandomString(30)));           
             return contacts;
         }
 
