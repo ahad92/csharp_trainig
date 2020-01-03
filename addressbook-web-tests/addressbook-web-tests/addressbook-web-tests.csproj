@@ -114,8 +114,9 @@
     <Compile Include="model\GroupContactRelation.cs" />
     <Compile Include="model\GroupData.cs" />
     <Compile Include="appmanager\GroupHelper.cs" />
-    <Compile Include="tests\AddingContactToGroupTests.cs" />
+    <Compile Include="tests\AddContactToGroupTests.cs" />
     <Compile Include="tests\AuthTestBase.cs" />
+    <Compile Include="tests\ContactRemovalTestsFromGroup.cs" />
     <Compile Include="tests\ContactTests\ContactInformationTests.cs" />
     <Compile Include="tests\ContactTests\ContactModificationTests.cs.cs" />
     <Compile Include="tests\ContactTests\ContactRemovalTests.cs" />
