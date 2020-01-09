@@ -4,20 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_tests_autoit
+namespace mantis_tests
 {
-    public class ContactData : IComparable<ContactData>, IEquatable<ContactData>
+    public class AccountData
     {
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
-        public int CompareTo(ContactData other)
-        {
-            return this.FirstName.CompareTo(other.FirstName);
-        }
+        public string Password { get; set; }
 
-        public bool Equals(ContactData other)
-        {
-            return this.FirstName.Equals(other.FirstName);
-        }
+        public string Email { get; set; }
+
+        public string Id { get; set; }
     }
 }
