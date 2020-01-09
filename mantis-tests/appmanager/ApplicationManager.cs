@@ -1,42 +1,48 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Diagnostics;
-using System.Threading;
 
-namespace WebaddressbookTests
+namespace mantis_tests
 {
     public class ApplicationManager
     {
         protected IWebDriver driver;
         protected string baseURL;
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigator;
-        protected GroupHelper groupHelper;
-        protected ContactHelper contactHelper;
+
+        public RegistrationHelper Registration { get; private set; }
+
+        public FtpHelper Ftp { get; private set; }
+
+        public LoginHelper loginHelper;
+        public ProjectHelper projectHelper;
+        public ManagmentMenuHelper menu;
+        public AdminHelper Admin { get; set; }
+        public APIHelper API { get; set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-        public ApplicationManager()
+        private ApplicationManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost";
-            loginHelper = new LoginHelper(this);
-            navigator = new NavigationHelper(this, baseURL);
-            groupHelper = new GroupHelper(this);
-            contactHelper = new ContactHelper(this);
-        }
+            baseURL = "http://localhost/mantisbt-2.20.0/";
+            Registration = new RegistrationHelper(this);
+            Ftp = new FtpHelper(this);
 
-        public static ApplicationManager GetInstance()
-        {
-            if (!app.IsValueCreated)
-            {
-                ApplicationManager newInstance = new ApplicationManager();
-                newInstance.Navigator.GoToHomePage();
-                app.Value = newInstance;
-            }
-            return app.Value;
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
+            options.UseLegacyImplementation = true;
+            Ftp = new FtpHelper(this);
+            loginHelper = new LoginHelper(this);
+            projectHelper = new ProjectHelper(this);
+            menu = new ManagmentMenuHelper(this, baseURL);
+            Admin = new AdminHelper(this, baseURL);
+            API = new APIHelper(this);
         }
 
         ~ApplicationManager()
@@ -51,30 +57,47 @@ namespace WebaddressbookTests
             }
         }
 
+        public static ApplicationManager GetInstance()
+        {
+            if (!app.IsValueCreated)
+            {
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php";
+                app.Value = newInstance;
+            }
+            return app.Value;
+        }
+
         public IWebDriver Driver
         {
-            get => driver;
+            get
+            {
+                return driver;
+            }
         }
-
-
         public LoginHelper Auth
         {
-            get => loginHelper;
+            get
+            {
+                return loginHelper;
+            }
         }
 
-        public NavigationHelper Navigator
+        public ProjectHelper Project
         {
-            get => navigator;
+            get
+            {
+                return projectHelper;
+            }
         }
 
-        public GroupHelper Groups
+        public ManagmentMenuHelper Menu
         {
-            get => groupHelper;
+            get
+            {
+                return menu;
+            }
         }
 
-        public ContactHelper Contacts
-        {
-            get => contactHelper;
-        }
     }
 }

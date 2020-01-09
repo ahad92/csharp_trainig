@@ -1,8 +1,11 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
-namespace WebaddressbookTests
+namespace mantis_tests
 {
     public class TestBase
     {
@@ -14,7 +17,6 @@ namespace WebaddressbookTests
             app = ApplicationManager.GetInstance();
         }
 
-        public static bool PERFORM_LONG_UI_CHEKS = false;
         public static Random rnd = new Random();
 
         public static string GenerateRandomString(int max)
@@ -27,6 +29,5 @@ namespace WebaddressbookTests
             }
             return builder.ToString();
         }
-
     }
 }

@@ -1,69 +1,51 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using System.IO;
+using System.Net.FtpClient;
 
-namespace mantis_tests.tests
+namespace mantis_tests
 {
-    /// <summary>
-    /// Summary description for AccountCreationTests
-    /// </summary>
-    [TestClass]
-    public class AccountCreationTests
+    [TestFixture]
+    public class AccountCreationTests : TestBase
     {
-        public AccountCreationTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+        [SetUp]
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        public void SetUpConfig()
         {
-            get
+            app.Ftp.BackupFile("/config_inc.php");
+            using (Stream localFile = File.Open("C:/Users/tanechka/source/repos/csharp_training/mantis_tests/mantis_tests/config_inc.php", FileMode.Open))
             {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
+                app.Ftp.Upload("/config_inc.php", localFile);
             }
         }
 
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
-        [TestMethod]
-        public void TestMethod1()
+        [Test]
+        public void TestAccountRegistration()
         {
-            //
-            // TODO: Add test logic here
-            //
+
+            AccountData account = new AccountData()
+            {
+                Name = "testuser",
+                Password = "password",
+                Email = "testuser@localhost.localdomain"
+            };
+            List<AccountData> accounts = app.Admin.GetAllAccounts();
+            AccountData existingAccount = accounts.Find(x => x.Name == account.Name);
+            if (existingAccount != null)
+            {
+                app.Admin.DeleteAccount(existingAccount);
+            }
+            app.Registration.Registrator(account);
+
+        }
+
+        [TearDown]
+
+        public void RestoreConfig()
+        {
+            app.Ftp.RestoreBackupFile("/config_inc.php");
         }
     }
 }
