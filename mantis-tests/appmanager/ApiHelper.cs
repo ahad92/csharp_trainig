@@ -15,6 +15,7 @@ namespace mantis_tests
 
         public void CreateNewIssue(AccountData account, ProjectData project, IssueData issueData)
         {
+            
             Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
             Mantis.IssueData issue = new Mantis.IssueData();
             issue.summary = issueData.Summary;
