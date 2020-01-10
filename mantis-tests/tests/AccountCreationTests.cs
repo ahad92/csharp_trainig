@@ -24,7 +24,6 @@ namespace mantis_tests
         [Test]
         public void TestAccountRegistration()
         {
-
             AccountData account = new AccountData()
             {
                 Name = "testuser",

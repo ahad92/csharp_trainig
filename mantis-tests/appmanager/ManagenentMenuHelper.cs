@@ -20,20 +20,20 @@ namespace mantis_tests
 
         public void GoToManageMenu()
         {
-            if (driver.Url == baseURL + "/mantisbt-2.20.0/manage_overview_page.php")
+            if (driver.Url == baseURL + "/mantisbt-2.22.0/manage_overview_page.php")
             {
                 return;
             }
-            driver.FindElement(By.XPath("//a[@href='/mantisbt-2.20.0/manage_overview_page.php']")).Click();
+            driver.FindElement(By.XPath("//a[@href='/mantisbt-2.22.0/manage_overview_page.php']")).Click();
         }
 
         public void GoToProjectForm()
         {
-            if (driver.Url == baseURL + "/mantisbt-2.20.0/manage_proj_page.php")
+            if (driver.Url == baseURL + "/mantisbt-2.22.0/manage_proj_page.php")
             {
                 return;
             }
-            driver.FindElement(By.XPath("//*[text()='Управление проектами']")).Click();
+            driver.FindElement(By.XPath("(//a[@href='/mantisbt-2.22.0/manage_overview_page.php'])")).Click();
         }
     }
 }

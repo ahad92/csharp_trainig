@@ -23,10 +23,10 @@ namespace mantis_tests
             List<AccountData> accounts = new List<AccountData>();
             IWebDriver driver = OpenAppAndLogin();
             driver.Url = baseUrl + "/manage_user_page.php";
-            IList<IWebElement> rows = driver.FindElements(By.CssSelector("table tr.row-1, table tr.row - 2"));
+            IList<IWebElement> rows = driver.FindElements(By.CssSelector("table td a"));
             foreach (IWebElement row in rows)
             {
-                IWebElement link = row.FindElement(By.TagName("a"));
+                IWebElement link = row; //.FindElement(By.TagName("a"));
                 string name = link.Text;
                 string href = link.GetAttribute("href");
                 Match m = Regex.Match(href, @"\d+$");
@@ -46,8 +46,8 @@ namespace mantis_tests
         {
             IWebDriver driver = OpenAppAndLogin();
             driver.Url = baseUrl + "/manage_user_edit_page.php?user_id=" + account.Id;
-            driver.FindElement(By.XPath("//input[@type='submit' and @value='Delete User']")).Click();
-            driver.FindElement(By.XPath("//input[@type='submit' and @value='Delete Account']")).Click();
+            driver.FindElement(By.CssSelector("form[id='manage-user-delete-form']")).Click();
+            driver.FindElement(By.CssSelector("input.btn")).Click();
         }
 
         private IWebDriver OpenAppAndLogin()
@@ -55,9 +55,9 @@ namespace mantis_tests
             IWebDriver driver = new SimpleBrowserDriver();
             driver.Url = baseUrl + "/login_page.php";
             driver.FindElement(By.Name("username")).SendKeys("administrator");
-            driver.FindElement(By.CssSelector("[type='submit']")).Click();
+            driver.FindElement(By.CssSelector("input.btn")).Click();
             driver.FindElement(By.Name("password")).SendKeys("root");
-            driver.FindElement(By.CssSelector("[type='submit']")).Click();
+            driver.FindElement(By.CssSelector("input.btn")).Click();
             return driver;
         }
     }

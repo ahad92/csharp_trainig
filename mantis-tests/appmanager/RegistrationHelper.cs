@@ -23,12 +23,12 @@ namespace mantis_tests
 
         public void OpenRegistrationForm()
         {
-            driver.FindElements(By.CssSelector("span.bracket-link"))[0].Click();
+            driver.FindElement(By.LinkText("Зарегистрировать новую учётную запись")).Click();
         }
 
         public void SubmitRegistration()
         {
-            driver.FindElement(By.CssSelector("[type='submit']")).Click();
+            driver.FindElement(By.XPath("//input[@value='Зарегистрироваться']")).Click();
         }
 
         public void FillRegistrationForm(AccountData account)
@@ -39,7 +39,7 @@ namespace mantis_tests
 
         public void OpenMainPage()
         {
-            manager.Driver.Url = "http://localhost:8080/mantisbt-2.20.0/login_page.php";
+            manager.Driver.Url = "http://localhost/mantisbt-2.22.0";
         }
     }
 }
